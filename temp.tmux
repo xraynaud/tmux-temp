@@ -11,6 +11,8 @@ temp_interpolation=(
 
 temp_commands=(
   "#($CURRENT_DIR/scripts/temp_cpu.sh)"
+  "#($CURRENT_DIR/scripts/temp_bg_color.sh)"
+  "#($CURRENT_DIR/scripts/temp_fg_color.sh)"
 )
 
 do_interpolation() {
