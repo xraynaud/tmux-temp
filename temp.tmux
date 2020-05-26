@@ -7,6 +7,8 @@ source "$CURRENT_DIR/scripts/helpers.sh"
 
 temp_interpolation=(
   "\\#{temp_cpu}"
+  "\#{temp_bg_color}"
+  "\#{temp_fg_color}"
 )
 
 temp_commands=(
