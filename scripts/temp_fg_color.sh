@@ -19,10 +19,10 @@ get_fg_color_settings() {
 }
 
 print_fg_color() {
-  local temp=$($CURRENT_DIR/temp_cpu.sh | sed -e 's/°[A-Z]//')
-  if [ $temp < 50 ]; then
+  local temp=$($CURRENT_DIR/temp_cpu.sh | sed -e 's/[.].*$//')
+  if [ $temp -lt 50 ]; then
     echo "$temp_low_fg_color"
-  elif [ $temp <65 ]; then
+  elif [ $temp -lt 65 ]; then
     echo "$temp_medium_fg_color"
   else
     echo "$temp_high_fg_color"

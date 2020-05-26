@@ -19,10 +19,10 @@ get_bg_color_settings() {
 }
 
 print_bg_color() {
-  local temp=$($CURRENT_DIR/temp_cpu.sh | sed -e 's/°[A-Z]//')
-  if [ $temp < 50 ]; then
+  local temp=$($CURRENT_DIR/temp_cpu.sh | sed -e 's/[.].*$//')
+  if [ $temp -lt 50 ]; then
     echo "$temp_low_bg_color"
-  elif [ $temp <65 ]; then
+  elif [ $temp -lt 65 ]; then
     echo "$temp_medium_bg_color"
   else
     echo "$temp_high_bg_color"
