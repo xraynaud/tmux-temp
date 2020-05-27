@@ -63,5 +63,7 @@ Example:
 
 ### Supported Options
 
+- `#{temp_cpu}` - Outputs temperature
 - `#{temp_units}` - Temperature units. Valid options: "C" or "F" (default "C")
-
+- `#{temp_bg_color}` - colours status bar background depending on temperature value (green, yellow, red). Thresholds are 55°C and 70°C.
+- `#{temp_fg_color}` - colours status bar foreground depending on temperature value (green, yellow, red). Thresholds are 55°C and 70°C. 
