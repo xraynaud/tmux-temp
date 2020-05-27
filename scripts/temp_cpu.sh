@@ -7,19 +7,25 @@ source "$CURRENT_DIR/helpers.sh"
 
 print_cpu_temp() {
   local temp
+  local temp_cmd
+  local temp_expr
   local units=$1
 
-  # try with very common lm-sensors package
-  if command_exists "sensors"; then
-    temp=$(sensors | sed '/^[^Package]/d' | sed '/^\s*$/d' | tail -n 1 | awk '{a=$4} END {printf("%f", a)}')
+  # if this is Raspberry Pi
+  if [[ $(uname -mr) =~ (arm|aarch64|raspi) ]]; then
+    temp_cmd="vcgencmd"
+    temp_args=" measure_temp | tr -d -c 0-9."
+  else # else use lmsensors
+    temp_cmd="sensors"
+    temp_args=" | sed '/^[^Package]/d' | sed '/^\s*$/d' | tail -n 1 | awk '{a=$4} END {printf("%f", a)}'"
+  fi
 
-  # try if this is Raspberry Pi
-  elif command_exists "vcgencmd"; then
-    temp=$(vcgencmd measure_temp | tr -d -c 0-9.)
-
-  else
+  if command_exists $temp_cmd; then
+    temp=$(eval "${temp_cmd} ${temp_args}")
+    else
     echo "no sensors found"
   fi
+
 
   if [ "$units" = "F" ]; then
     temp=$(celsius_to_fahrenheit "$temp")
